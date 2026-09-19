@@ -1,13 +1,3 @@
-// Lets a user link an old job-tracking spreadsheet and pull its data into the
-// ApplyLog sheet this extension manages. Old sheets can have more, fewer, or
-// differently-named columns than ApplyLog's ten fixed columns — this module:
-//   1. Reads the old sheet's header row and fuzzy-matches each column against
-//      ApplyLog's known fields (title, company, status, etc).
-//   2. Shows the user a preview of that mapping before touching anything.
-//   3. On confirm, writes the matched columns into their normal slots and
-//      appends any UNRECOGNIZED columns as brand-new columns on the ApplyLog
-//      sheet (reusing them on repeat imports) so nothing is ever discarded.
-
 const CANONICAL_FIELD_ORDER = ['title', 'company', 'status', 'type', 'date', 'location', 'salary', 'deadline', 'link', 'notes'];
 
 // Header text aliases used to auto-detect which old column is which field.
@@ -328,10 +318,13 @@ function confirmImport() {
                         pendingImport.columnMap.forEach((col, colIndex) => {
                             const value = oldRow[colIndex] || '';
                             if (!value) return;
+                            const cellValue = (col.field === 'link' && typeof buildLinkCellValue === 'function')
+                                ? buildLinkCellValue(value)
+                                : value;
                             if (col.field) {
-                                row[CANONICAL_FIELD_ORDER.indexOf(col.field)] = value;
+                                row[CANONICAL_FIELD_ORDER.indexOf(col.field)] = cellValue;
                             } else {
-                                row[col.targetIndex] = value;
+                                row[col.targetIndex] = cellValue;
                             }
                         });
                         return row;

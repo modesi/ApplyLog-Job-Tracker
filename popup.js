@@ -2,6 +2,13 @@ const SHEET_HEADERS = ['Job Title', 'Company', 'Status', 'Type', 'Date Added', '
 const STATUS_OPTIONS = ['Saved', 'Applied', 'Interviewing', 'Offer', 'Rejected'];
 const TYPE_OPTIONS = ['Internship', 'Full-Time', 'Part-Time'];
 
+function buildLinkCellValue(url) {
+    const trimmed = (url || '').toString().trim();
+    if (!trimmed) return '';
+    const escaped = trimmed.replace(/"/g, '""');
+    return `=HYPERLINK("${escaped}","Open ↗")`;
+}
+
 
 function requestAuthToken(interactive, callback) {
     chrome.runtime.sendMessage({ type: 'getAuthToken', interactive: !!interactive }, (response) => {
@@ -17,7 +24,7 @@ function requestAuthToken(interactive, callback) {
     });
 }
 
-const SPREADSHEET_STYLE_VERSION = 2;
+const SPREADSHEET_STYLE_VERSION = 3;
 
 // Style (or re-style) a spreadsheet if it isn't already on the current look.
 // Handles both brand-new sheets and ones that were created before a style update.
@@ -266,7 +273,7 @@ function addManualEntry(event) {
             }
 
             const dateAdded = new Date().toLocaleDateString();
-            const row = [title, company, status, type, dateAdded, location, salary, deadline, link, notes];
+            const row = [title, company, status, type, dateAdded, location, salary, deadline, buildLinkCellValue(link), notes];
 
             setFeedback(document.getElementById('manualFeedback'), 'Adding…', '');
             appendRowToSheet(result.spreadsheetId, result.sheetGid, token, row);
@@ -557,7 +564,7 @@ function applyStyleRequests(spreadsheetId, gid, oauthToken, cleanupRequests, onD
         blue: parseInt(hex.slice(4, 6), 16) / 255
     });
 
-    const columnWidths = [190, 150, 110, 110, 100, 130, 100, 105, 190, 220];
+    const columnWidths = [190, 150, 110, 110, 100, 175, 115, 105, 90, 220];
 
     const statusColors = [
         { value: 'Saved',        text: 'ad7231' }, // Bronze Testudo
@@ -615,6 +622,17 @@ function applyStyleRequests(spreadsheetId, gid, oauthToken, cleanupRequests, onD
                 range: { sheetId: gid, startRowIndex: 1, endRowIndex: 1000, startColumnIndex: 0, endColumnIndex: SHEET_HEADERS.length },
                 cell: { userEnteredFormat: { backgroundColor: rgb('ffffff') } },
                 fields: 'userEnteredFormat.backgroundColor'
+            }
+        },
+
+        // Clip instead of overflow: long values (addresses, salary ranges, etc.)
+        // get cut off at the column boundary rather than visually bleeding into
+        // the next column when that neighboring cell has its own content.
+        {
+            repeatCell: {
+                range: { sheetId: gid, startRowIndex: 1, endRowIndex: 1000, startColumnIndex: 0, endColumnIndex: SHEET_HEADERS.length },
+                cell: { userEnteredFormat: { wrapStrategy: 'CLIP' } },
+                fields: 'userEnteredFormat.wrapStrategy'
             }
         },
 

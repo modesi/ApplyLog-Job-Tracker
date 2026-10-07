@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="google-site-verification" content="hkYUkE7Lv0brobwOGv0gkG-ewUBqZNpUAJCYsQ2TKYs" />
+  <meta name="description" content="ApplyLog is a Chrome extension that tracks your job and internship applications and syncs them straight to a Google Sheet in your own Google account." />
+  <title>ApplyLog — Track job applications, synced to your own Google Sheet</title>
+  <link rel="icon" href="ApplyLogIcon.png" />
+  <link rel="stylesheet" href="landing.css" />
+</head>
+<body>
+
+  <div class="wrap">
+    <div class="topbar">
+      <div class="brand">
+        <img src="ApplyLogIcon.png" alt="ApplyLog logo" />
+        <span>ApplyLog</span>
+      </div>
+      <nav>
+        <a class="text-link" href="#how-it-works">How it works</a>
+        <a class="text-link" href="#data">Your data</a>
+        <a class="text-link" href="privacy.html">Privacy policy</a>
+        <a class="store-link" href="https://chromewebstore.google.com/detail/applylog-job-tracker/hllegimodgdopppnmichhfcbnnendoli" target="_blank" rel="noopener">Add to Chrome</a>
+      </nav>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <div class="hero">
+      <div>
+        <h1>Simplify the job/internship application process!</h1>
+        <p class="lede">
+          ApplyLog is a free Chrome extension for job and internship hunters. Add a job in one click
+          and it's saved straight to a Google Sheet in your own account — no separate tracker to
+          keep updating by hand.
+        </p>
+        <div class="hero-ctas">
+          <a class="btn-primary" href="https://chromewebstore.google.com/detail/applylog-job-tracker/hllegimodgdopppnmichhfcbnnendoli" target="_blank" rel="noopener">Add to Chrome — it's free</a>
+          <a class="btn-secondary" href="https://github.com/modesi/ApplyLog-Handshake-Job-Tracker" target="_blank" rel="noopener">View source on GitHub</a>
+        </div>
+      </div>
+      <div class="hero-shot">
+        <img src="ApplyLog Example.png" alt="ApplyLog popup showing applied, saved, and in-progress job applications" />
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <section class="section" id="how-it-works">
+      <h2>What ApplyLog does</h2>
+      <p class="section-lede">
+        Click the extension icon, connect your Google account once, and ApplyLog handles the
+        spreadsheet for you — creating it, formatting it, and keeping it organized as you apply.
+      </p>
+
+      <dl class="feature-grid">
+        <div class="feature">
+          <dt>Syncs to your own Google Sheet</dt>
+          <dd>ApplyLog creates a spreadsheet called "ApplyLog - Job Applications" in your Google Drive and formats it automatically — header row, column widths, status colors, dropdowns, and filters.</dd>
+        </div>
+        <div class="feature">
+          <dt>Add jobs in seconds</dt>
+          <dd>A short form — title, company, status, type, location, salary, deadline, link, notes — appends a new row to your sheet the moment you submit it.</dd>
+        </div>
+        <div class="feature">
+          <dt>Organized by stage</dt>
+          <dd>Applications are grouped into Applied, Saved, and In Progress (interviewing, offer, rejected), read live from your sheet so it's always up to date.</dd>
+        </div>
+        <div class="feature">
+          <dt>Search and stats</dt>
+          <dd>Filter by title or company, and see at-a-glance counts for each stage of your search without opening the spreadsheet.</dd>
+        </div>
+        <div class="feature">
+          <dt>Import an old spreadsheet</dt>
+          <dd>Already tracking applications somewhere else? Pick it from Google's own file picker and ApplyLog matches its columns to your ApplyLog sheet, shows a preview, and imports the rows.</dd>
+        </div>
+        <div class="feature">
+          <dt>Nothing lost on close</dt>
+          <dd>In-progress form entries are auto-saved, so closing the popup mid-entry doesn't lose your draft.</dd>
+        </div>
+      </dl>
+    </section>
+  </div>
+
+  <div class="wrap">
+    <section class="section" id="data">
+      <div class="trust">
+        <h2>How ApplyLog uses your Google account</h2>
+        <p class="section-lede">
+          ApplyLog only ever touches spreadsheets it made itself, or ones you explicitly hand it. Here's exactly what that means.
+        </p>
+        <div class="trust-grid">
+          <div class="trust-item">
+            <div class="label">What it accesses</div>
+            <p>Google Sheets and Google Drive, scoped to the "ApplyLog - Job Applications" spreadsheet it creates in your account, plus — only if you use the import feature — the one old spreadsheet you pick through Google's own file picker.</p>
+          </div>
+          <div class="trust-item">
+            <div class="label">What it doesn't do</div>
+            <p>ApplyLog can't browse or search your Drive on its own. It only ever sees files it created itself or that you explicitly selected through Google's picker — nothing else.</p>
+          </div>
+          <div class="trust-item">
+            <div class="label">Your control</div>
+            <p>Disconnect at any time from the extension popup to revoke access and clear cached tokens. Your spreadsheet stays in your Drive either way.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <div class="wrap">
+    <footer>
+      <span>ApplyLog is a free, open-source Chrome extension.</span>
+      <div class="foot-links">
+        <a href="https://github.com/modesi/ApplyLog-Handshake-Job-Tracker" target="_blank" rel="noopener">GitHub</a>
+        <a href="privacy.html">Privacy policy</a>
+        <a href="https://chromewebstore.google.com/detail/applylog-job-tracker/hllegimodgdopppnmichhfcbnnendoli" target="_blank" rel="noopener">Chrome Web Store</a>
+      </div>
+    </footer>
+  </div>
+
+</body>
+</html>
